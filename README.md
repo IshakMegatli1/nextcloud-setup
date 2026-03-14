@@ -1,9 +1,10 @@
 # Nextcloud Self-Hosting Documentation
 **Author:** Ishak  
-**Server:** Lenovo ThinkCentre M710q  
+**Server:** ThinkCentre
 **OS:** Ubuntu (Linux)  
 **Date:** March 13, 2026  
 **Domain:** nextcloud.cloud-9.app  
+**TECHNOLOGIES / NETWORKING CONCEPTS USED** : Docker & Containerization, DNS, Port Forwarding & NAT, Cloudflare Tunnel, Reverse Proxy & TLS Termination, Self-Hosting Architecture, Network Security — IP hiding, trusted domains, HTTPS enforcement
 
 ---
 
@@ -313,7 +314,7 @@ sudo systemctl status cloudflared
 
 ### 2. Cloudflare CNAME Conflict with Existing A Record
 - **Error:** `Failed to create record nextcloud.cloud-9.app: An A, AAAA, or CNAME record with that host already exists`
-- **Cause:** Old A record `nextcloud.cloud-9.app → 69.158.67.103` imported from name.com
+- **Cause:** Old A record `nextcloud.cloud-9.app → **.***.**.***` imported from name.com
 - **Fix:** Manually deleted the old A record in Cloudflare DNS dashboard before re-running `cloudflared tunnel route dns`
 
 ### 3. Wrong credentials-file Path in config.yml
@@ -360,7 +361,7 @@ ingress:
 ### Cloudflare DNS Records (after setup)
 | Type  | Name                   | Content                              | Proxy |
 |-------|------------------------|--------------------------------------|-------|
-| A     | cloud-9.app            | 69.158.67.103                        | ✅    |
+| A     | cloud-9.app            | **.***.**.***                       | ✅    |
 | CNAME | nextcloud.cloud-9.app  | c02240e1-...cfargotunnel.com         | ✅    |
 
 ### Docker Containers (docker ps)
